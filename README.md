@@ -1,0 +1,1 @@
+# sdvx-copyright-checker
