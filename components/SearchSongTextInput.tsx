@@ -15,6 +15,7 @@ export const SearchSongTextInput = (props: Props) => {
   return <TextField
             variant="outlined"
             fullWidth
+            placeholder='楽曲名で検索'
             {...props}
             InputProps={{
               startAdornment: (
