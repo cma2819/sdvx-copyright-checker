@@ -1,0 +1,17 @@
+{
+  "updatedAt": "2222/3/11",
+  "songs": [
+    {
+      "id": "music-id-1",
+      "name": "きょくのなまえ",
+      "artist": "あーてぃすと",
+      "copyright": "コピーライトあり"
+    },
+    {
+      "id": "music-id-2",
+      "name": "really awesome music",
+      "artist": "big artist",
+      "copyright": null
+    }
+  ]
+}
