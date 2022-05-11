@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/songs.ts": {
+      "includeFiles": "store/**"
+    }
+  }
+}
