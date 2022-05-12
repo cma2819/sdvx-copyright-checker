@@ -1,5 +1,5 @@
 import { fetchPagesCount, loadSongsIn, Song } from '../modules/songs';
-import { saveStore } from '../store/song.store';
+import { readSongs, saveStore } from '../store/song.store';
 
 console.log('Load songs from official website');
 
@@ -21,9 +21,12 @@ fetchPagesCount()
   }, Promise.resolve<Song[]>([]));
 })
 .then((songs) => {
-  saveStore(new Date(), songs);
-  console.log('Finish to fetch all songs.');
-  console.debug(songs);
+  if (JSON.stringify(readSongs().songs) !== JSON.stringify(songs)) {
+    saveStore(new Date(), songs);
+    console.log('Finish to fetch all songs.');
+  } else {
+    console.log('Store is up to date.');
+  }
 })
 .catch((err) => {
   console.error(err);

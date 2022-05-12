@@ -58,6 +58,7 @@ export const loadSongsIn = async (page: number): Promise<Song[]> => {
 
       const copyright = await (await (await songIndexPage.$('div#music-data div#copy'))?.getProperty('textContent'))?.jsonValue<string>();
 
+      await songIndexPage.waitForSelector('button#cboxClose');
       const button = await songIndexPage.$<HTMLButtonElement>('button#cboxClose');
       await button?.evaluate((b) => b.click());
       await songIndexPage.waitForSelector('div#music-data', {
