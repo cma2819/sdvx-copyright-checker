@@ -1,0 +1,41 @@
+# Load songs and make PR scheduled
+
+name: Scheduled loading songs
+
+# Run 0:00 pm in JST everyday
+on:
+  schedule:
+    - cron: '0 16 * * *'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  load-songs-from-easite:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.4.2
+      
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.1.1
+    - name: Install dependencies
+      run: yarn install
+    - name: Load songs
+      run: yarn load
+      
+    - name: Get diff for songs.json
+      id: diff
+      uses: technote-space/get-diff-action@v4.0.1
+      with:
+        FILES: |
+          store/songs.json
+          
+    # make PR if diff exists
+    - name: Make Pull Request
+      env:
+        TZ: 'Asia/Tokyo'
+      run: |
+        gh pr create
+        -B master
+        -t "[automated] Update songs at $(date +'%Y-%m-%d')"
+        -b 'This PR is automatically generated. Check diff about songs.'
+      if: steps.diff.outputs.diff
