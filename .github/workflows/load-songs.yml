@@ -4,6 +4,7 @@ name: Scheduled loading songs
 
 # Run 0:00 pm in JST everyday
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 16 * * *'
 
