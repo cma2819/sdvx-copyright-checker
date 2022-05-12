@@ -24,7 +24,7 @@ export const fetchPagesCount = async (): Promise<number> => {
     throw new Error('Song page select not has any option.');
   }
 
-  return (await lastOption.getProperty('value')).jsonValue<number>();
+  return Number(await (await lastOption.getProperty('value')).jsonValue<string>());
 }
 
 export const loadSongsIn = async (page: number): Promise<Song[]> => {
