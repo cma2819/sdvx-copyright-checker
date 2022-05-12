@@ -7,9 +7,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 16 * * *'
-    
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -40,6 +37,7 @@ jobs:
     - name: Make Pull Request
       env:
         TZ: 'Asia/Tokyo'
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git switch -c auto/stores/$(date +'%Y-%m-%d')
         git add .
