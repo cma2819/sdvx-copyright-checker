@@ -48,7 +48,9 @@ export const loadSongsIn = async (page: number): Promise<Song[]> => {
       console.debug(`Fetching song: ${id} ...`);
 
       await a.evaluate((elm) => elm.click());
-      await songIndexPage.waitForSelector('div#music-data');
+      await songIndexPage.waitForSelector('div#music-data', {
+        visible: true
+      });
   
       const [name, artist] = await Promise.all((
         await songIndexPage.$$<HTMLParagraphElement>('div#music-data div.info p')
@@ -59,20 +61,22 @@ export const loadSongsIn = async (page: number): Promise<Song[]> => {
       await songIndexPage.waitForSelector('button#cboxClose');
       const button = await songIndexPage.$<HTMLButtonElement>('button#cboxClose');
       await button?.evaluate((b) => b.click());
-      await songIndexPage.waitForSelector('div#music-data', {
+      
+      return songIndexPage.waitForSelector('div#music-data', {
         hidden: true
-      });
-  
-      return [
-        ...prev,
-        {
-          id,
-          name,
-          artist,
-          copyright: !copyright || copyright === '' ? null : copyright,
-        },
-      ];
+      }).then((() => {
+        return [
+          ...prev,
+          {
+            id,
+            name,
+            artist,
+            copyright: !copyright || copyright === '' ? null : copyright,
+          },
+        ]
+      }));
     });
+    
   }, Promise.resolve<Song[]>([]));
 
   Promise.all(await results).then(async () => {
