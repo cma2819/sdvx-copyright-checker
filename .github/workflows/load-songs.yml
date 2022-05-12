@@ -43,6 +43,8 @@ jobs:
       run: |
         git switch -c auto/stores/$(date +'%Y-%m-%d')
         git add .
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config user.name "github-actions[bot]"
         git commit -m "automatically generate songs store."
         git push origin auto/stores/$(date +'%Y-%m-%d')
         gh pr create -B master -t "[automated] Update songs at $(date +'%Y-%m-%d')" -b 'This PR is automatically generated. Check diff about songs.'
