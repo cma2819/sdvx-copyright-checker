@@ -1,5 +1,3 @@
-import axios from 'axios';
-import DOMParser from 'dom-parser';
 import puppeteer from 'puppeteer';
 
 type SongId = string;

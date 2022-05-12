@@ -3,8 +3,8 @@ import { readSongs, saveStore } from '../store/song.store';
 
 console.log('Load songs from official website');
 
-const range = (end: number) => {
-  return Array.from(Array(end - 1), (_, key) => key + 1);
+const range = (length: number) => {
+  return Array.from(Array(length), (_, key) => key + 1);
 }
 
 fetchPagesCount()
