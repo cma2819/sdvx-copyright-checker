@@ -48,9 +48,7 @@ export const loadSongsIn = async (page: number): Promise<Song[]> => {
       console.debug(`Fetching song: ${id} ...`);
 
       await a.evaluate((elm) => elm.click());
-      await songIndexPage.waitForSelector('div#music-data', {
-        visible: true
-      });
+      await songIndexPage.waitForSelector('div#music-data');
   
       const [name, artist] = await Promise.all((
         await songIndexPage.$$<HTMLParagraphElement>('div#music-data div.info p')
