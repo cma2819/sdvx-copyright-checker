@@ -25,21 +25,25 @@ jobs:
       run: yarn install
     - name: Load songs
       run: yarn load
-      
-    - name: Get diff for songs.json
+
+    - name: Make diff
       id: diff
-      uses: technote-space/get-diff-action@v4.0.1
-      with:
-        PATTERNS: |
-          store/songs.json
-          
+      run: |
+        git add -N .
+        git diff --name-only --exit-code
+      continue-on-error: true
+      
+    - name: Create new branch
+      run: |
+
     # make PR if diff exists
     - name: Make Pull Request
       env:
         TZ: 'Asia/Tokyo'
       run: |
-        gh pr create
-        -B master
-        -t "[automated] Update songs at $(date +'%Y-%m-%d')"
-        -b 'This PR is automatically generated. Check diff about songs.'
-      if: steps.diff.outputs.diff
+        git switch -c auto/stores/$(date +'%Y-%m-%d')
+        git add .
+        git commit -m "automatically generate songs store."
+        git push origin auto/stores/$(date +'%Y-%m-%d')
+        gh pr create -B master -t "[automated] Update songs at $(date +'%Y-%m-%d')" -b 'This PR is automatically generated. Check diff about songs.'
+      if: steps.diff.outcome == 'failure'
