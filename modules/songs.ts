@@ -47,10 +47,20 @@ export const loadSongsIn = async (page: number): Promise<Song[]> => {
       }
       console.debug(`Fetching song: ${id} ...`);
 
-      await a.evaluate((elm) => elm.click());
-      await songIndexPage.waitForSelector('div#music-data', {
-        visible: true
-      });
+      while (true) {
+        try {
+          await a.evaluate((elm) => elm.click());
+          await songIndexPage.waitForSelector('div#music-data', {
+            visible: true
+          });
+          break;
+        } catch (err) {
+          console.info('Missing info element, etry.');
+          const button = await songIndexPage.$<HTMLButtonElement>('button#cboxClose');
+          await button?.evaluate((b) => b.click());
+          continue;
+        }
+      }
   
       const [name, artist] = await Promise.all((
         await songIndexPage.$$<HTMLParagraphElement>('div#music-data div.info p')
@@ -76,7 +86,7 @@ export const loadSongsIn = async (page: number): Promise<Song[]> => {
         ]
       }));
     });
-    
+
   }, Promise.resolve<Song[]>([]));
 
   Promise.all(await results).then(async () => {
