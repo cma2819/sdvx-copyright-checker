@@ -7,6 +7,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 16 * * *'
+    
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,7 +30,7 @@ jobs:
       id: diff
       uses: technote-space/get-diff-action@v4.0.1
       with:
-        FILES: |
+        PATTERNS: |
           store/songs.json
           
     # make PR if diff exists
