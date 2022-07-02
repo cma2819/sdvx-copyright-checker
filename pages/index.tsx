@@ -26,7 +26,7 @@ const Home: NextPage<Props> = ({ updatedAt }) => {
     fetch('/api/songs')
     .then((res) => res.json())
     .then((data) => setSongs(data.songs));
-  });
+  }, []);
 
   return (
     <div className={styles.container}>
