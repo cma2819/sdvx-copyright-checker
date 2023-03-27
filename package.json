@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "vercel dev",
     "build": "next build",
-    "start": "next start",
+    "start": "vercel dev",
     "lint": "next lint",
     "load": "ts-node ./scripts/loadSong.ts",
     "test": "jest"
