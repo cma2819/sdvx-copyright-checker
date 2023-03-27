@@ -8,25 +8,20 @@ import styles from '../styles/Home.module.css'
 
 type Props = {
   updatedAt: string;
+  songs: Song[];
 };
 
 export const getStaticProps: GetStaticProps<Props> = () => {
+  const { songs, updatedAt } = readSongs();
   return {
     props: {
-      updatedAt: readSongs().updatedAt,
+      updatedAt: updatedAt,
+      songs: songs,
     }
   };
 }
 
-const Home: NextPage<Props> = ({ updatedAt }) => {
-
-  const [songs, setSongs] = useState<Song[]>([]);
-
-  useEffect(() => {
-    fetch('/api/songs')
-    .then((res) => res.json())
-    .then((data) => setSongs(data.songs));
-  }, []);
+const Home: NextPage<Props> = ({ updatedAt, songs }) => {
 
   return (
     <div className={styles.container}>

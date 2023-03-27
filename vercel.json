@@ -1,7 +1,5 @@
 {
   "functions": {
-    "pages/api/songs.ts": {
-      "includeFiles": "store/**"
-    }
+    "pages/api/songs.ts": {}
   }
 }
