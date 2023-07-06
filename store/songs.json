@@ -1,6 +1,30 @@
 {
-  "updatedAt": "2023/7/5",
+  "updatedAt": "2023/7/6",
   "songs": [
+    {
+      "id": "bKlnxN_BHq9EnLXx3CkiJA",
+      "name": "劇場版ムーニャポヨポヨスッポコニャーゴ~侵略だいず帝国！ドラマティック宇宙大戦争~",
+      "artist": "打打だいず",
+      "copyright": null
+    },
+    {
+      "id": "mMKS_Mmp1mlmBoqyZx7t5w",
+      "name": "The EXworld of sound",
+      "artist": "Remix by Aoi, Vocal by Kuroa*",
+      "copyright": null
+    },
+    {
+      "id": "vqAiS1r_stwDzcAOFeOs6Q",
+      "name": "トーキョーサマーナイト（華金Remix）",
+      "artist": "あまみ×ひなみ",
+      "copyright": null
+    },
+    {
+      "id": "qx6IP8k3-HlV-OXgKvxx7A",
+      "name": "Pixelated Platform (Super Honey!)",
+      "artist": "そよもぎ",
+      "copyright": null
+    },
     {
       "id": "7LNLqCYlZeddxNWxz7nf6Q",
       "name": "凛として咲く花の如く",
